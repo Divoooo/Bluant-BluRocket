@@ -3,22 +3,12 @@ using System.Collections.Generic;
 using UnityEngine;
 
 public class ShopItemsManager : MonoBehaviour {
-    public Material one;
-    public Material two;
-    public Material tree;
+    
 
     public GameObject ship0body;
     public GameObject ship1body;
     public GameObject ship2body;
 
-    GameObject showedShip0;
-    GameObject manaken1;
-    
-    Material manaken0material0, manaken0material1, manaken0material2;
-    /*
-    public Material manaken1material0, manaken1material1, manaken1material2;
-    public Material manaken2material0, manaken2material1, manaken2material2;
-    */
     int currnetItemNum = 1;
     
     Material[] set0= new Material[2];
@@ -39,21 +29,19 @@ public class ShopItemsManager : MonoBehaviour {
 
 
 
-
-
     // Use this for initialization
     void Start () {
-        setMatererialsFromResources();
 
-        
+
+        setMatererialsFromResources();      
 
     }
 
     // Update is called once per frame
     void Update()
     {
-        setMatererialsFromResources();
-       // Debug.Log("Evo" + materials.name);
+        
+   
         if (set0[0] != null && set1[1] != null && set2 != null)
         {
             ship0body.GetComponent<Renderer>().materials = set0;
@@ -62,21 +50,7 @@ public class ShopItemsManager : MonoBehaviour {
         }
         
         
-        /*  string path = "Assets/Materials/ROCKETS/Rocket_4/Rocket_4_2/";
-          materials = Resources.Load(path) as GameObject;
-          if(materials != null)
-          {
-              Debug.Log("Evo");
-          }
-          else
-          {
-              Debug.Log("Nema");
-
-          }*/
-        //  Debug.Log("Evo" + materials.name);
-
-        // ship0body.GetComponent<Renderer>().materials = da;
-        //da = ship0body.GetComponent<Renderer>().materials;
+       
     }
 
     public void checkSwipe()
@@ -182,10 +156,7 @@ public class ShopItemsManager : MonoBehaviour {
                 currentSet[0] = (Material) materials1[0];
                 currentSet[1] = (Material)materials1[1]; 
                 return currentSet;
-
-
                 break;
-
 
             case "rocket2":
                 currentSet[0] = (Material)materials2[0];
@@ -198,14 +169,12 @@ public class ShopItemsManager : MonoBehaviour {
                 currentSet[1] = (Material)materials3[1];
                 return currentSet;
                 break;
+
             case "rocket4":
                 currentSet[0] = (Material)materials4[0];
                 currentSet[1] = (Material)materials4[1];
                 return currentSet;
-
-
                 break;
-
 
             case "rocket5":
                 currentSet[0] = (Material)materials5[0];
@@ -218,14 +187,12 @@ public class ShopItemsManager : MonoBehaviour {
                 currentSet[1] = (Material)materials6[1];
                 return currentSet;
                 break;
+
             case "rocket7":
                 currentSet[0] = (Material)materials7[0];
                 currentSet[1] = (Material)materials7[1];
                 return currentSet;
-
-
                 break;
-
 
             case "rocket8":
                 currentSet[0] = (Material)materials8[0];
@@ -238,6 +205,7 @@ public class ShopItemsManager : MonoBehaviour {
                 currentSet[1] = (Material)materials9[1];
                 return currentSet;
                 break;
+
             case "rocket10":
                 currentSet[0] = (Material)materials10[0];
                 currentSet[1] = (Material)materials10[1];
@@ -265,16 +233,7 @@ public class ShopItemsManager : MonoBehaviour {
         materials10 = Resources.LoadAll("Material/Rocket_10", typeof(Material));
         
 
-        if (materials1 != null)
-        {
-            Debug.Log("Evo" + materials1.Length);
-            
-        }
-        else
-        {
-            Debug.Log("Nema");
-
-        }
+        
     }
    
     }
