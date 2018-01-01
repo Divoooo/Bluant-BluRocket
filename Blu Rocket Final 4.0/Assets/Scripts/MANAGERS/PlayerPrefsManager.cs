@@ -51,5 +51,42 @@ public class PlayerPrefsManager : MonoBehaviour
     {
         return PlayerPrefs.GetInt(Coins_key);
     }
+
+    public static void setUnlockedItem(string shipName)
+    {
+        int success = 1;
+        if (shipName != null) {
+            Debug.Log("Setting "+ shipName+ " Aviability to True" );
+
+            PlayerPrefs.SetInt(shipName, success);
+            PlayerPrefs.Save();
+        }else{
+            Debug.Log("shipName is null");
+    }
+    }
+    public static bool getUnlockedItem(string shipName)
+    {
+        int currShipAvailability = -1;
+        currShipAvailability = PlayerPrefs.GetInt(shipName);
+        Debug.Log("evo" + currShipAvailability+"for" + shipName);
+        if (currShipAvailability != -1)
+        {
+            if(currShipAvailability == 1)
+            {
+                Debug.Log("currShipAvailability == 1 - True");
+                return true;
+            }else
+            {
+                Debug.Log("currShipAvailability false");
+                return false;
+            }
+
+        }else{
+            Debug.Log("Availability int is null");
+                return false;
+        }
+
+        
+    }
     
 }

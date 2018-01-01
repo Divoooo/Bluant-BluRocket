@@ -1,9 +1,18 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.UI;
 
 public class ShopItemsManager : MonoBehaviour {
-    
+
+
+    public Text selectedItemPriceText;
+    public int curSelectedItemPrice;
+    public int selectedItemPrice;
+    public string selectedItemName;
+    bool selectedItemAvaliability;
+    public Image lockAviability;
+
 
     public GameObject ship0body;
     public GameObject ship1body;
@@ -24,29 +33,51 @@ public class ShopItemsManager : MonoBehaviour {
     public static Object[] materials8;
     public static Object[] materials9;
     public static Object[] materials10;
-    
-    
 
+    private static ShopItemsManager _instance;
 
+    public static ShopItemsManager Instance
+    {
+
+        get
+        {
+            // IF there is currently no instance create instance
+            if (_instance == null)
+            {
+                GameObject ShopItemsManager = new GameObject("ShopItemsManager");
+                ShopItemsManager.AddComponent<ShopItemsManager>();
+            }
+            return _instance;
+        }
+
+    }
 
     // Use this for initialization
     void Start () {
 
 
-        setMatererialsFromResources();      
+        setMatererialsFromResources();
+        checkSwipe(); 
 
     }
 
     // Update is called once per frame
     void Update()
     {
-        
-   
+
+       // lockAviability.enabled = false;
         if (set0[0] != null && set1[1] != null && set2 != null)
         {
             ship0body.GetComponent<Renderer>().materials = set0;
             ship1body.GetComponent<Renderer>().materials = set1;
             ship2body.GetComponent<Renderer>().materials = set2;
+            if (selectedItemAvaliability)
+            {
+                lockAviability.enabled = false;
+            }else
+            {
+                lockAviability.enabled = true;
+            }
         }
         
         
@@ -55,87 +86,167 @@ public class ShopItemsManager : MonoBehaviour {
 
     public void checkSwipe()
     {
+        
+
         switch (currnetItemNum)
         {
-          
+
+            case 0:
+
+
+                break;
 
             case 1:
-                set0 = setTexture("rocket10");
-                set1 = setTexture("rocket1");
-                set2 = setTexture("rocket2");
+
+                set0 = SetTexture("rocket10");
+                set1 = SetTexture("rocket1");
+
+                //saving current " MIDDLE " item price 
+                selectedItemPrice = curSelectedItemPrice ;
+                selectedItemPriceText.text = "Price: " + selectedItemPrice.ToString() + "Coins";
+                selectedItemName = "rocket1";
+
+                //
+
+                set2 = SetTexture("rocket2");
+                selectedItemAvaliability = PlayerPrefsManager.getUnlockedItem("Rocket1");
+                Debug.Log("evo" + selectedItemAvaliability);
 
                 currnetItemNum++;
 
                 break;
 
             case 2:
-                set0 = setTexture("rocket1");
-                set1 = setTexture("rocket2");
-                set2 = setTexture("rocket3");
+                set0 = SetTexture("rocket1");
+                set1 = SetTexture("rocket2");
+
+                selectedItemPrice = curSelectedItemPrice;
+                selectedItemPriceText.text = "Price: " + selectedItemPrice.ToString() + "Coins";
+                selectedItemName = "rocket2";
+
+                set2 = SetTexture("rocket3");
+                selectedItemAvaliability = PlayerPrefsManager.getUnlockedItem("Rocket2");
+                Debug.Log("evo" + selectedItemAvaliability);
 
                 currnetItemNum++;
 
                 break;
             case 3:
-                set0 = setTexture("rocket2");
-                set1 = setTexture("rocket3");
-                set2 = setTexture("rocket4");
+                set0 = SetTexture("rocket2");
+                set1 = SetTexture("rocket3");
+
+                selectedItemPrice = curSelectedItemPrice;
+                selectedItemPriceText.text = "Price: " + selectedItemPrice.ToString() + "Coins";
+                selectedItemName = "rocket3";
+
+                set2 = SetTexture("rocket4");
+                selectedItemAvaliability = PlayerPrefsManager.getUnlockedItem("Rocket3");
+                Debug.Log("evo" + selectedItemAvaliability);
 
                 currnetItemNum++;
 
                 break;
             case 4:
-                set0 = setTexture("rocket3");
-                set1 = setTexture("rocket4");
-                set2 = setTexture("rocket5");
+                set0 = SetTexture("rocket3");
+                set1 = SetTexture("rocket4");
+
+                selectedItemPrice = curSelectedItemPrice;
+                selectedItemPriceText.text = "Price: " + selectedItemPrice.ToString() + "Coins";
+                selectedItemName = "rocket4";
+
+                set2 = SetTexture("rocket5");
+                selectedItemAvaliability = PlayerPrefsManager.getUnlockedItem("Rocket4");
+                Debug.Log("evo" + selectedItemAvaliability);
 
                 currnetItemNum++;
 
                 break;
             case 5:
-                set0 = setTexture("rocket4");
-                set1 = setTexture("rocket5");
-                set2 = setTexture("rocket6");
+                set0 = SetTexture("rocket4");
+                set1 = SetTexture("rocket5");
+
+                selectedItemPrice = curSelectedItemPrice;
+                selectedItemPriceText.text = "Price: " + selectedItemPrice.ToString() + "Coins";
+                selectedItemName = "rocket5";
+
+                set2 = SetTexture("rocket6");
+                selectedItemAvaliability = PlayerPrefsManager.getUnlockedItem("Rocket5");
+                Debug.Log("evo" + selectedItemAvaliability);
 
                 currnetItemNum++;
 
                 break;
             case 6:
                 
-                set0 = setTexture("rocket5");
-                set1 = setTexture("rocket6");
-                set2 = setTexture("rocket7");
+                set0 = SetTexture("rocket5");
+                set1 = SetTexture("rocket6");
+
+                selectedItemPrice = curSelectedItemPrice;
+                selectedItemPriceText.text = "Price: " + selectedItemPrice.ToString() + "Coins";
+                selectedItemName = "rocket6";
+
+                set2 = SetTexture("rocket7");
+                selectedItemAvaliability = PlayerPrefsManager.getUnlockedItem("Rocket6");
+                Debug.Log("evo" + selectedItemAvaliability);
 
                 currnetItemNum++;
 
                 break;
             case 7:
-                set0 = setTexture("rocket6");
-                set1 = setTexture("rocket7");
-                set2 = setTexture("rocket8");
+                set0 = SetTexture("rocket6");
+                set1 = SetTexture("rocket7");
+
+                selectedItemPrice = curSelectedItemPrice;
+                selectedItemPriceText.text = "Price: " + selectedItemPrice.ToString() + "Coins";
+                selectedItemName = "rocket7";
+
+                set2 = SetTexture("rocket8");
+                selectedItemAvaliability = PlayerPrefsManager.getUnlockedItem("Rocket7");
+                Debug.Log("evo" + selectedItemAvaliability);
 
                 currnetItemNum++;
 
                 break;
             case 8:
-                set0 = setTexture("rocket7");
-                set1 = setTexture("rocket8");
-                set2 = setTexture("rocket9");
+                set0 = SetTexture("rocket7");
+                set1 = SetTexture("rocket8");
+
+                selectedItemPrice = curSelectedItemPrice;
+                selectedItemPriceText.text = "Price: " + selectedItemPrice.ToString() + "Coins";
+                selectedItemName = "rocket8";
+
+                set2 = SetTexture("rocket9");
+                selectedItemAvaliability = PlayerPrefsManager.getUnlockedItem("Rocket8");
+                Debug.Log("evo" + selectedItemAvaliability);
 
                 currnetItemNum++;
 
                 break;
             case 9:
-                set0 = setTexture("rocket8");
-                set1 = setTexture("rocket9");
-                set2 = setTexture("rocket10");
+                set0 = SetTexture("rocket8");
+                set1 = SetTexture("rocket9");
+
+                selectedItemPrice = curSelectedItemPrice;
+                selectedItemPriceText.text = "Price: " + selectedItemPrice.ToString() + "Coins";
+                selectedItemName = "rocket9";
+
+                set2 = SetTexture("rocket10");
+                selectedItemAvaliability = PlayerPrefsManager.getUnlockedItem("Rocket9");
+                Debug.Log("evo" + selectedItemAvaliability);
 
                 currnetItemNum++;
                 break;
             case 10:
-                set0 = setTexture("rocket9");
-                set1 = setTexture("rocket10");
-                set2 = setTexture("rocket1");
+                set0 = SetTexture("rocket9");
+                set1 = SetTexture("rocket10");
+
+                selectedItemPrice = curSelectedItemPrice;
+                selectedItemPriceText.text = "Price: " + selectedItemPrice.ToString() + "Coins";
+                selectedItemName = "rocket10";
+
+                set2 = SetTexture("rocket1");
+                selectedItemAvaliability = PlayerPrefsManager.getUnlockedItem("Rocket10");
+                Debug.Log("evo" + selectedItemAvaliability);
 
                 currnetItemNum = 1;
 
@@ -145,70 +256,85 @@ public class ShopItemsManager : MonoBehaviour {
 
 
         }
+      //  selectedItemPriceText.text = "Price: " + selectedItemPrice.ToString() + "Coins";
     }
 
-    public Material[] setTexture(string name)
+    public Material[] SetTexture(string name)
     {
+        
+        
         Material[] currentSet = new Material[2];
         switch (name)
         {
             case "rocket1":
                 currentSet[0] = (Material) materials1[0];
-                currentSet[1] = (Material)materials1[1]; 
+                currentSet[1] = (Material)materials1[1];
+                curSelectedItemPrice = 1;
+                
+                
                 return currentSet;
                 break;
 
             case "rocket2":
                 currentSet[0] = (Material)materials2[0];
                 currentSet[1] = (Material)materials2[1];
+                curSelectedItemPrice = 22;
                 return currentSet;
                 break;
 
             case "rocket3":
                 currentSet[0] = (Material)materials3[0];
                 currentSet[1] = (Material)materials3[1];
+                curSelectedItemPrice = 33;
                 return currentSet;
                 break;
 
             case "rocket4":
                 currentSet[0] = (Material)materials4[0];
                 currentSet[1] = (Material)materials4[1];
+                curSelectedItemPrice = 44;
                 return currentSet;
                 break;
 
             case "rocket5":
                 currentSet[0] = (Material)materials5[0];
                 currentSet[1] = (Material)materials5[1];
+                curSelectedItemPrice = 55;
                 return currentSet;
                 break;
 
             case "rocket6":
                 currentSet[0] = (Material)materials6[0];
                 currentSet[1] = (Material)materials6[1];
+                curSelectedItemPrice = 66;
                 return currentSet;
                 break;
 
             case "rocket7":
                 currentSet[0] = (Material)materials7[0];
                 currentSet[1] = (Material)materials7[1];
+                curSelectedItemPrice = 77;
                 return currentSet;
                 break;
 
             case "rocket8":
                 currentSet[0] = (Material)materials8[0];
                 currentSet[1] = (Material)materials8[1];
+                curSelectedItemPrice = 88;
                 return currentSet;
                 break;
 
             case "rocket9":
                 currentSet[0] = (Material)materials9[0];
                 currentSet[1] = (Material)materials9[1];
+                curSelectedItemPrice = 99;
                 return currentSet;
                 break;
 
             case "rocket10":
                 currentSet[0] = (Material)materials10[0];
                 currentSet[1] = (Material)materials10[1];
+                curSelectedItemPrice = 1000;
                 return currentSet;
                 break;
 
@@ -235,6 +361,9 @@ public class ShopItemsManager : MonoBehaviour {
 
         
     }
+
+    
+
    
     }
    

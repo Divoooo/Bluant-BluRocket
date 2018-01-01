@@ -254,8 +254,9 @@ public class Ship : MonoBehaviour {
 			//Handheld.Vibrate();
 			camMain.GetComponent<CameraShake> ().shakeDuration = 0.15f;
 			AudioSource.PlayClipAtPoint (hit,camMain.transform.position);
+            PlayerPrefsManager.SetCoins(coinsPerGame);
 
-			GameObject scoreSprite = Instantiate (ScoreText, transform.position, Quaternion.identity);
+            GameObject scoreSprite = Instantiate (ScoreText, transform.position, Quaternion.identity);
 			AudioSource.PlayClipAtPoint (scoreSound,camMain.transform.position);
 			gameObject.SetActive (false);
 		} else if (coll.tag == "Row") {
@@ -272,7 +273,7 @@ public class Ship : MonoBehaviour {
             //Set Coins
 
             coinsPerGame++;
-            PlayerPrefsManager.SetCoins(coinsPerGame);
+            
 
             ///////////////
 
