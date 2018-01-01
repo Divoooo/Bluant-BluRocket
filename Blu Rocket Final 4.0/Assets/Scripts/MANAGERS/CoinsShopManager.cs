@@ -41,11 +41,13 @@ public class CoinsShopManager : MonoBehaviour {
         {
             PlayerPrefsManager.setUnlockedItem(currName);
             coins -= currPrice;
+            GameObject.Find("CoinsShopManager").GetComponent<ShopItemsManager>().selectedItemAvaliability = true;
 
 
 
 
-        }else
+        }
+        else
         {
             Debug.Log("U have no enought money! Your balance is : " + coins);
         }

@@ -10,7 +10,7 @@ public class ShopItemsManager : MonoBehaviour {
     public int curSelectedItemPrice;
     public int selectedItemPrice;
     public string selectedItemName;
-    bool selectedItemAvaliability;
+    public bool selectedItemAvaliability;
     public Image lockAviability;
 
 
@@ -109,7 +109,7 @@ public class ShopItemsManager : MonoBehaviour {
                 //
 
                 set2 = SetTexture("rocket2");
-                selectedItemAvaliability = PlayerPrefsManager.getUnlockedItem("Rocket1");
+                selectedItemAvaliability = PlayerPrefsManager.getUnlockedItem("rocket1");
                 Debug.Log("evo" + selectedItemAvaliability);
 
                 currnetItemNum++;
@@ -125,7 +125,7 @@ public class ShopItemsManager : MonoBehaviour {
                 selectedItemName = "rocket2";
 
                 set2 = SetTexture("rocket3");
-                selectedItemAvaliability = PlayerPrefsManager.getUnlockedItem("Rocket2");
+                selectedItemAvaliability = PlayerPrefsManager.getUnlockedItem("rocket2");
                 Debug.Log("evo" + selectedItemAvaliability);
 
                 currnetItemNum++;
@@ -140,7 +140,7 @@ public class ShopItemsManager : MonoBehaviour {
                 selectedItemName = "rocket3";
 
                 set2 = SetTexture("rocket4");
-                selectedItemAvaliability = PlayerPrefsManager.getUnlockedItem("Rocket3");
+                selectedItemAvaliability = PlayerPrefsManager.getUnlockedItem("rocket3");
                 Debug.Log("evo" + selectedItemAvaliability);
 
                 currnetItemNum++;
@@ -155,7 +155,7 @@ public class ShopItemsManager : MonoBehaviour {
                 selectedItemName = "rocket4";
 
                 set2 = SetTexture("rocket5");
-                selectedItemAvaliability = PlayerPrefsManager.getUnlockedItem("Rocket4");
+                selectedItemAvaliability = PlayerPrefsManager.getUnlockedItem("rocket4");
                 Debug.Log("evo" + selectedItemAvaliability);
 
                 currnetItemNum++;
@@ -170,7 +170,7 @@ public class ShopItemsManager : MonoBehaviour {
                 selectedItemName = "rocket5";
 
                 set2 = SetTexture("rocket6");
-                selectedItemAvaliability = PlayerPrefsManager.getUnlockedItem("Rocket5");
+                selectedItemAvaliability = PlayerPrefsManager.getUnlockedItem("rocket5");
                 Debug.Log("evo" + selectedItemAvaliability);
 
                 currnetItemNum++;
@@ -186,7 +186,7 @@ public class ShopItemsManager : MonoBehaviour {
                 selectedItemName = "rocket6";
 
                 set2 = SetTexture("rocket7");
-                selectedItemAvaliability = PlayerPrefsManager.getUnlockedItem("Rocket6");
+                selectedItemAvaliability = PlayerPrefsManager.getUnlockedItem("rocket6");
                 Debug.Log("evo" + selectedItemAvaliability);
 
                 currnetItemNum++;
@@ -201,7 +201,7 @@ public class ShopItemsManager : MonoBehaviour {
                 selectedItemName = "rocket7";
 
                 set2 = SetTexture("rocket8");
-                selectedItemAvaliability = PlayerPrefsManager.getUnlockedItem("Rocket7");
+                selectedItemAvaliability = PlayerPrefsManager.getUnlockedItem("rocket7");
                 Debug.Log("evo" + selectedItemAvaliability);
 
                 currnetItemNum++;
@@ -216,7 +216,7 @@ public class ShopItemsManager : MonoBehaviour {
                 selectedItemName = "rocket8";
 
                 set2 = SetTexture("rocket9");
-                selectedItemAvaliability = PlayerPrefsManager.getUnlockedItem("Rocket8");
+                selectedItemAvaliability = PlayerPrefsManager.getUnlockedItem("rocket8");
                 Debug.Log("evo" + selectedItemAvaliability);
 
                 currnetItemNum++;
@@ -231,7 +231,7 @@ public class ShopItemsManager : MonoBehaviour {
                 selectedItemName = "rocket9";
 
                 set2 = SetTexture("rocket10");
-                selectedItemAvaliability = PlayerPrefsManager.getUnlockedItem("Rocket9");
+                selectedItemAvaliability = PlayerPrefsManager.getUnlockedItem("rocket9");
                 Debug.Log("evo" + selectedItemAvaliability);
 
                 currnetItemNum++;
@@ -245,7 +245,7 @@ public class ShopItemsManager : MonoBehaviour {
                 selectedItemName = "rocket10";
 
                 set2 = SetTexture("rocket1");
-                selectedItemAvaliability = PlayerPrefsManager.getUnlockedItem("Rocket10");
+                selectedItemAvaliability = PlayerPrefsManager.getUnlockedItem("rocket10");
                 Debug.Log("evo" + selectedItemAvaliability);
 
                 currnetItemNum = 1;
@@ -262,7 +262,7 @@ public class ShopItemsManager : MonoBehaviour {
     public Material[] SetTexture(string name)
     {
         
-        
+        //selectedItemName = name;
         Material[] currentSet = new Material[2];
         switch (name)
         {
@@ -292,7 +292,7 @@ public class ShopItemsManager : MonoBehaviour {
             case "rocket4":
                 currentSet[0] = (Material)materials4[0];
                 currentSet[1] = (Material)materials4[1];
-                curSelectedItemPrice = 44;
+                curSelectedItemPrice = 14;
                 return currentSet;
                 break;
 
@@ -306,7 +306,7 @@ public class ShopItemsManager : MonoBehaviour {
             case "rocket6":
                 currentSet[0] = (Material)materials6[0];
                 currentSet[1] = (Material)materials6[1];
-                curSelectedItemPrice = 66;
+                curSelectedItemPrice = 26;
                 return currentSet;
                 break;
 
