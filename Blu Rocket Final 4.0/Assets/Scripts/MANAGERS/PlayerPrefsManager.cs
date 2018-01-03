@@ -88,5 +88,40 @@ public class PlayerPrefsManager : MonoBehaviour
 
         
     }
+
+
+
+    public static void setCurrentShip(int currnetShip) {
+        if (currnetShip != 0)
+        {
+            Debug.Log("Current ship setted to:  " + currnetShip );
+
+            PlayerPrefs.SetInt("currentShip", currnetShip);
+            PlayerPrefs.Save();
+        }
+        else
+        {
+            Debug.Log("currentShip is 0");
+        }
+
+    }
+
+
+    public static int getCurrentShip()
+    {
+        int currShip = 0;
+        currShip = PlayerPrefs.GetInt("currentShip");
+        if (currShip != 0)
+        {
+            return currShip;  
+        }
+        else
+        {
+
+            Debug.Log("currentShip is 0");
+            return 1;
+
+        }
+    }
     
 }
