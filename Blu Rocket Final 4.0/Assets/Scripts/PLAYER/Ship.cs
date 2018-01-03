@@ -26,20 +26,23 @@ public class Ship : MonoBehaviour {
 	public ParticleSystem explosion;
 
 	public GameObject ScoreText;
+    public GameObject shipBody;
 
 
     public int coins;
     public int coinsPerGame;
+    Object[] materials;
 
-	// Use this for initialization
+    // Use this for initialization
 
-	void OnEnable(){
+    void OnEnable(){
 	
 		scoreText.text = 0.ToString ();
 		currentScore = 0;
 	}
 	void Awake(){
 
+        setSelectedShip();
 		// UCITAVANJE MOVEMENT SKRIPTE
 		//movement = this.GetComponent<Movement> ();
 
@@ -285,4 +288,20 @@ public class Ship : MonoBehaviour {
 	
 
 	}
+
+    public void setSelectedShip()
+    {
+        int currentShip = -1;
+        Material[] set= new Material[2];
+        currentShip = PlayerPrefsManager.getCurrentShip();
+
+        materials = Resources.LoadAll("Material/Rocket_" + currentShip + "", typeof(Material));
+        set[0] = (Material)materials[0];
+        set[1] = (Material)materials[1];
+        if(materials[1] != null)
+        {
+            
+            shipBody.GetComponent<Renderer>().materials = set;
+        }
+    }
 }
