@@ -7,7 +7,7 @@ public class RowFinal : MonoBehaviour {
  
     void OnTriggerEnter(Collider col) {
 
-        print("Zid je sudaren");
+      //  print("Zid je sudaren");
         
 
     //Setting up Coins

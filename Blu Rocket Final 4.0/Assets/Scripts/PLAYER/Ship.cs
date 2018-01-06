@@ -12,7 +12,7 @@ public class Ship : MonoBehaviour {
 	public Transform shipTransform;
 	public float shipSpeed = 5f;
 	private bool isMoving;
-	public bool isMovingLeft, isMovingRight,canTeleport,canRotate;
+	public bool isMovingLeft, isMovingRight,canRotate;
 	public float tilt;
 	public Vector3 vektor;
 	public Vector3 startRotation,currentRotation;
@@ -24,14 +24,20 @@ public class Ship : MonoBehaviour {
 	public GameObject camMain;
 	public AudioClip hit,scoreSound;
 	public ParticleSystem explosion;
+    public bool leftTeleportActive, rightTeleportActive;
 
 	public GameObject ScoreText;
     public GameObject shipBody;
 
+    public float teleportTime;
 
+    public Text coinsText;
     public int coins;
     public int coinsPerGame;
     Object[] materials;
+    int bonusFromTeleport = 1;
+
+    
 
     // Use this for initialization
 
@@ -62,7 +68,8 @@ public class Ship : MonoBehaviour {
 
 	void Start () {
 
-		canTeleport = true;
+        leftTeleportActive = false;
+        rightTeleportActive = false;
 		canRotate = true;
 		scoreText.text = 0.ToString ();
         highScore = PlayerPrefsManager.GetHighScore();
@@ -80,21 +87,39 @@ public class Ship : MonoBehaviour {
 	// Update is called once per frame
 	void Update () {
 		restrictShipPosition ();
-		restrictShipVelocity ();
-		teleportShip ();
+        Debug.Log("coins per game: " + coinsPerGame);
+
+        //restrictShipVelocity ();
+        //teleportShip ();
+      //  Debug.Log("leftTeleport: " + leftTeleportActive + "  ,    rightTeleport: " + rightTeleportActive);
+      if(teleportTime <= 2 && teleportTime > 0)
+        {
+            teleportTime -= Time.deltaTime;
+            Debug.Log("Poceo sam bonus sad je : " + bonusFromTeleport);
+            if(teleportTime <= 0)
+            {
+                
+                bonusFromTeleport = 1;
+                Debug.Log("Prekinio sam bonus i vratio na : " + bonusFromTeleport);
+             //   BonusFromTeleportCounter();
+                teleportTime = 0.0f;
+            }
+        } 
+        
 
 
+    }
 
-	}
-
-
+ 
 
 	void LateUpdate(){
 	
 		if (isMovingLeft) {
-
+          //  ThreeSixty();
 			currentRotation.y = Mathf.Clamp (currentRotation.y + 5f, startRotation.y - angleClamp, startRotation.y + angleClamp);
-			shipTransform.localRotation = Quaternion.Euler (currentRotation);
+        //    currentRotation.y = 180f;
+
+            shipTransform.localRotation = Quaternion.Euler (currentRotation);
 		} else if (isMovingRight) {
 
 			currentRotation.y = Mathf.Clamp (currentRotation.y - 5f, startRotation.y - angleClamp, startRotation.y + angleClamp);
@@ -108,6 +133,15 @@ public class Ship : MonoBehaviour {
 	
 	}
 
+    public void ThreeSixty()
+    {
+        for(int i = 0; i < 10; i++)
+        {
+            currentRotation.y = 36 * i;
+            Debug.Log("I ;;;;;;;;;;;;; " + i);
+            shipTransform.localRotation = Quaternion.Euler(currentRotation);
+        }
+    }
 
 
 
@@ -115,7 +149,7 @@ public class Ship : MonoBehaviour {
 
 
 
-	void FixedUpdate(){
+    void FixedUpdate(){
 		
 		Vector3 currentRotation = shipTransform.localRotation.eulerAngles;
 		float angle;
@@ -203,17 +237,11 @@ public class Ship : MonoBehaviour {
 
 	public void restrictShipPosition(){
 		Transform transform = getTransformOfObject ();
-		Vector3 currentPosition = new Vector3(Mathf.Clamp(transform.position.x,-36.5f,36.5f),transform.position.y,transform.position.z);
+		Vector3 currentPosition = new Vector3(Mathf.Clamp(transform.position.x,-37.5f,37.5f),transform.position.y,transform.position.z);
 		transform.position = currentPosition;
 
 	}
-	public void restrictShipVelocity(){
-
-		//RESTRICT ROTATION
-
-
-		//srb.velocity = new Vector2 (Mathf.Clamp (rb.velocity.x, -25f, 25f), 0f); 
-	}
+	
 
 	public Transform getTransformOfObject(){
 		Transform transform = this.GetComponent<Transform> ();
@@ -221,26 +249,28 @@ public class Ship : MonoBehaviour {
 
 	}
 
-	public void teleportShip(){
+    public void teleportShip() {
 
-		Vector3 currentPosition = transform.position;
+       
+            Vector3 newPosition = new Vector3(transform.position.x * -1f, transform.position.y, transform.position.z);
+            shipTransform.position = newPosition;
+            
+        
+
+        /*Vector3 currentPosition = transform.position;
 		float currentx = currentPosition.x;
 		if (currentx >= -36f && currentx <=36f) {
 			canTeleport = true;
 		}
-		if (currentx <= -36.1f || currentx >= 36.1f) {
+		if (currentx <= -36.1f || currentx >= 36.1f) {*/
+    }
+			
+
+
 		
-			if (canTeleport) {
-				Vector3 newPosition = new Vector3 (currentx*-1f, currentPosition.y, currentPosition.z);
-				shipTransform.position = newPosition;
-				canTeleport = false;
-			}
-
-
-		}
 	
-	}
-
+	
+    
 
 	void OnTriggerEnter(Collider coll){
 		
@@ -265,6 +295,7 @@ public class Ship : MonoBehaviour {
 		} else if (coll.tag == "Row") {
 			
 			currentScore++;
+            //currentScore = currentScore * bonusFromTeleport;
 			if (currentScore > highScore) {
 			
 				highScore = currentScore;
@@ -274,12 +305,22 @@ public class Ship : MonoBehaviour {
 			}
 
             //Set Coins
-
-            coinsPerGame++;
+           
+                coinsPerGame += 1;
+            Debug.Log("coinsPerGameNow 1 : " + coinsPerGame);
+            Debug.Log("bonusFromTeleport : " + bonusFromTeleport);
+            if (bonusFromTeleport != 1)
+            { 
+                coinsPerGame = coinsPerGame + bonusFromTeleport;
+            }
+                
+            Debug.Log("coinsPerGameNow 2 : " + coinsPerGame);
             
 
-            ///////////////
 
+
+            ///////////////
+            coinsText.text = coinsPerGame.ToString();
             scoreText.text = currentScore.ToString ();
 
 		} 
@@ -302,6 +343,24 @@ public class Ship : MonoBehaviour {
         {
             
             shipBody.GetComponent<Renderer>().materials = set;
+        }
+    }
+    public void BonusFromTeleportCounter()
+    {
+       
+        if(bonusFromTeleport == 1)
+        {
+            teleportTime = 2.0f;
+        }
+        if(teleportTime <= 0)
+        {
+
+            bonusFromTeleport = 1;
+        }
+        else if(teleportTime > 0 && teleportTime <= 2)
+        {
+            bonusFromTeleport++;
+            teleportTime = 2.0f;
         }
     }
 }

@@ -358,16 +358,14 @@ public class ShopItemsManager : MonoBehaviour {
                 curSelectedItemPrice = 1000;
                 return currentSet;
                 break;
-
-
-
-
+         
         }
         return currentSet;
     }
 
     public void setMatererialsFromResources()
     {
+       
         materials1 = Resources.LoadAll("Material/Rocket_1", typeof(Material));
         materials2 = Resources.LoadAll("Material/Rocket_2", typeof(Material));
         materials3 = Resources.LoadAll("Material/Rocket_3", typeof(Material));
